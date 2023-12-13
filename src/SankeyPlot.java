@@ -1,0 +1,96 @@
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
+
+import java.util.Map;
+
+
+/* This Plot class takes in the fileName from constructor and show the SankeyPlot */
+public class SankeyPlot extends Application {
+    public String fileName;
+    public Map<String, Double> dataDic;
+    public String title;
+    public String label;
+
+    double deltaX = 500;    // The distance from left node to right nodes
+    double deltaY = 50;
+    double ZOOM = 0.50;
+    Font defaultFont = new Font("Arial", 18);
+    Font labelFont = new Font("Arial", 22);
+
+    double xInit = 75; // The x-coordinate for the left most part of whole graph
+    double yInit = 200;
+    double endX = deltaX + xInit;   // The x for end nodes column
+    double endY = 25;
+
+    public SankeyPlot(String fn) {
+        this.fileName = fn;
+    }
+
+    public SankeyPlot() {
+        // Test Constructor
+        this.fileName = "D:\\Zhu22\\SynologyDrive\\1.2022_Year2\\4.JAVA\\CourseWork3\\data.txt";
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage stage) {
+        // Read in the file data
+        SankeyReader reader = new SankeyReader(fileName);
+        this.dataDic = reader.data;
+        this.title = reader.title;
+        this.label = reader.label;
+
+
+        // set the pane and stage : root
+        stage.setWidth(1000);
+        stage.setTitle(title);
+        Scene scene = new Scene(new Group());
+        Pane root = new Pane();
+
+        // Iterate to add Nodes and Linkers to root
+        SankeyText text0 = new SankeyText(label + "\n[" + reader.returnSum() + "]", xInit - 20, yInit + reader.returnSum() / 2 * ZOOM, labelFont);
+        SankeyNode node0 = new SankeyNode(xInit + text0.width, yInit, reader.returnSum() * ZOOM, Color.GREEN.darker());
+        root.getChildren().add(text0);
+        root.getChildren().add(node0);
+
+        double lowerNodeY = endY;
+        double lowerLinkY = yInit;
+        for (String str : dataDic.keySet()) {
+            // Draw a link and a node
+
+            double size = dataDic.get(str) * ZOOM;
+            Color color = SankeyColor.getColor();
+            str = str + "\n[" + size + "]";
+
+            SankeyNode node = new SankeyNode(endX, lowerNodeY + deltaY, size, color);
+            SankeyLinker linker = new SankeyLinker(xInit + text0.width, lowerLinkY, node, color);
+            SankeyText text = new SankeyText(str, endX + 20, lowerNodeY + deltaY  + size / 2 + 5, defaultFont);
+
+
+//            SankeyLinker linker = new SankeyLinker(new SankeyNode(xInit + text0.width, lowerLinkY, size, color), node, color);
+
+
+            root.getChildren().addAll(node, text, linker);
+
+            lowerLinkY = linker.lowerY;
+            lowerNodeY = node.lowerY;
+        }
+
+
+        // Show everything
+        scene.setRoot(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+
+}

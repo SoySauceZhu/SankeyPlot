@@ -1,0 +1,7 @@
+Title of Stage
+label
+Mingjie 75
+class one 50
+class two 100
+class three 150
+class four 100
