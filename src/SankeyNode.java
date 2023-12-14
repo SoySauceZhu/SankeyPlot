@@ -35,4 +35,12 @@ public class SankeyNode extends Path {
         this.setFill(color);
     }
 
+    public void setxPos(double x) {
+        this.xPos = x;
+    }
+
+    public void setyPos(double y) {
+        this.yPos = y;
+    }
+
 }

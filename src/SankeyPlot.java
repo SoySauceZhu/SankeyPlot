@@ -6,16 +6,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.util.Map;
 
 
 /* This Plot class takes in the fileName from constructor and show the SankeyPlot */
 public class SankeyPlot extends Application {
-    public String fileName;
-    public Map<String, Double> dataDic;
-    public String title;
-    public String label;
+    String fileName;
+    Map<String, Double> dataDic;
+    String title;
+    String label;
 
     double deltaX = 500;    // The distance from left node to right nodes
     double deltaY = 50;
@@ -43,12 +42,6 @@ public class SankeyPlot extends Application {
 
     @Override
     public void start(Stage stage) {
-        // Read in the file data
-        SankeyReader reader = new SankeyReader(fileName);
-        this.dataDic = reader.data;
-        this.title = reader.title;
-        this.label = reader.label;
-
 
         stage.setWidth(1000);
         stage.setHeight(500);
@@ -57,6 +50,14 @@ public class SankeyPlot extends Application {
         Pane root = new Pane();
 
         this.yInit = 200;
+
+        // Read in the file data
+        SankeyReader reader = new SankeyReader(fileName);
+        this.dataDic = reader.data;
+        this.title = reader.title;
+        this.label = reader.label;
+
+
 //        this.yInit = stage.getHeight()/2 - reader.returnSum()/2;
 
         // Iterate to add Nodes and Linkers to root

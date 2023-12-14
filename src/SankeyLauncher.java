@@ -17,9 +17,13 @@ public class SankeyLauncher extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        primaryStage.setTitle("Plot Launcher");
+
+
         // Additional feature: text bar
         TextField fileNameField = new TextField();
         Button submitButton = new Button("Generate Plot");
+
 
         submitButton.setOnAction(actionEvent -> {
             String fileNameFieldText = fileNameField.getText();
@@ -35,19 +39,13 @@ public class SankeyLauncher extends Application {
         // Create a VBox layout to arrange the components vertically
         VBox vbox = new VBox(30);
         vbox.setAlignment(Pos.CENTER);
-        vbox.setPadding(new Insets(20)); // Padding around the VBox
+        vbox.setPadding(new Insets(20));
 
-        // Add textBar and Button to the VBox
         vbox.getChildren().addAll(fileNameField, submitButton);
 
-        // Create a scene and set it on the primary stage
         Scene scene = new Scene(vbox, 300, 150);
         primaryStage.setScene(scene);
 
-        // Set the title of the primary stage
-        primaryStage.setTitle("Plot Launcher");
-
-        // Show the primary stage
         primaryStage.show();
     }
 }

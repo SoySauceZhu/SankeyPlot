@@ -10,6 +10,8 @@ import javafx.scene.shape.VLineTo;
 public class SankeyLinker extends Path {
     SankeyNode start;
     SankeyNode end;
+    double startX;
+    double startY;
     double size;
     double lowerY;
     Color color;
@@ -39,24 +41,34 @@ public class SankeyLinker extends Path {
     }
 
     public SankeyLinker(double x, double y, SankeyNode node2, Color c) {
-        this.end = node2;
         this.color = c.deriveColor(0, 1, 1, 0.3);
-        this.size = node2.size;
-        this.lowerY = y + size;
 
-        double startX = x + SankeyNode.NodeWidth;
+        this.startY = y;
+        this.startX = x + SankeyNode.NodeWidth;
+        this.end = node2;
+        this.size = node2.size;
+        this.lowerY = this.startY + size;
+
         double endX = end.xPos;
         double endY = end.yPos;
         double width = endX - startX;   // Width of the curved band
 
         this.setStroke(Color.TRANSPARENT);  // I don't want stroke to be shown
 
-        this.getElements().add(new MoveTo(startX, y));
+        this.getElements().add(new MoveTo(startX, startY));
         this.getElements().add(new CubicCurveTo(startX + width / 2, y, startX + width / 2, endY, endX, endY));
         this.getElements().add(new VLineTo(endY + size));
         this.getElements().add(new CubicCurveTo(startX + width / 2, endY + size, startX + width / 2, y + size, startX, y + size));
         this.getElements().add(new VLineTo(y));
 
         this.setFill(color);
+    }
+
+    public void setStartX(double x) {
+        this.startX = x;
+    }
+
+    public void setStartY(double y) {
+        this.startY = y;
     }
 }
