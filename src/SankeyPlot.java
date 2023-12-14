@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.util.Map;
 
 
@@ -23,7 +24,7 @@ public class SankeyPlot extends Application {
     Font labelFont = new Font("Arial", 22);
 
     double xInit = 75; // The x-coordinate for the left most part of whole graph
-    double yInit = 200;
+    double yInit;
     double endX = deltaX + xInit;   // The x for end nodes column
     double endY = 25;
 
@@ -49,11 +50,14 @@ public class SankeyPlot extends Application {
         this.label = reader.label;
 
 
-        // set the pane and stage : root
         stage.setWidth(1000);
+        stage.setHeight(500);
         stage.setTitle(title);
         Scene scene = new Scene(new Group());
         Pane root = new Pane();
+
+        this.yInit = 200;
+//        this.yInit = stage.getHeight()/2 - reader.returnSum()/2;
 
         // Iterate to add Nodes and Linkers to root
         SankeyText text0 = new SankeyText(label + "\n[" + reader.returnSum() + "]", xInit - 20, yInit + reader.returnSum() / 2 * ZOOM, labelFont);
@@ -66,13 +70,13 @@ public class SankeyPlot extends Application {
         for (String str : dataDic.keySet()) {
             // Draw a link and a node
 
-            double size = dataDic.get(str) * ZOOM;
+            double size = dataDic.get(str) ;
             Color color = SankeyColor.getColor();
             str = str + "\n[" + size + "]";
 
-            SankeyNode node = new SankeyNode(endX, lowerNodeY + deltaY, size, color);
+            SankeyNode node = new SankeyNode(endX, lowerNodeY + deltaY, size * ZOOM, color);
             SankeyLinker linker = new SankeyLinker(xInit + text0.width, lowerLinkY, node, color);
-            SankeyText text = new SankeyText(str, endX + 20, lowerNodeY + deltaY  + size / 2 + 5, defaultFont);
+            SankeyText text = new SankeyText(str, endX + 20, lowerNodeY + deltaY  + size * ZOOM / 2 + 5, defaultFont);
 
 
 //            SankeyLinker linker = new SankeyLinker(new SankeyNode(xInit + text0.width, lowerLinkY, size, color), node, color);
