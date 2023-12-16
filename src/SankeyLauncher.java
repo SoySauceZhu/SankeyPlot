@@ -17,12 +17,12 @@ public class SankeyLauncher extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Plot Launcher");
+        primaryStage.setTitle("myPlot Launcher");
 
 
         // Additional feature: text bar
         TextField fileNameField = new TextField();
-        Button submitButton = new Button("Generate Plot");
+        Button submitButton = new Button("Generate myPlot");
 
 
         submitButton.setOnAction(actionEvent -> {

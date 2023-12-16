@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import java.util.Map;
 
 
-/* This Plot class takes in the fileName from constructor and show the SankeyPlot */
+/* This myPlot class takes in the fileName from constructor and show the SankeyPlot */
 public class SankeyPlot extends Application {
     String fileName;
     Map<String, Double> dataDic;

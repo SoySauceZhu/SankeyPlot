@@ -41,7 +41,7 @@ public class SankeyReader {
         SankeyReader.test();
     }
 
-    public void readerHelper(String fileName) {
+    private void readerHelper(String fileName) {
         File file = new File(fileName);
         try {
             FileReader fileReader = new FileReader(file);

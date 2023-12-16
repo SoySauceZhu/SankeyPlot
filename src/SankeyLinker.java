@@ -71,4 +71,8 @@ public class SankeyLinker extends Path {
     public void setStartY(double y) {
         this.startY = y;
     }
+
+    public void setEnd(SankeyNode node) {
+        this.end = node;
+    }
 }
