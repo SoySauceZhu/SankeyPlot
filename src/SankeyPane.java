@@ -8,7 +8,7 @@ public class SankeyPane extends Pane {
     SankeyReader reader;
 
     double xLeftMost = 75;
-    double ZOOM = 0.75;
+    double ZOOM;
     Font defaultFont = new Font("Arial", 18);
     Font labelFont = new Font("Arial", 22);
 
@@ -18,6 +18,7 @@ public class SankeyPane extends Pane {
     public SankeyPane(String fn) {
         filename = fn;
         reader = new SankeyReader(fn);
+        ZOOM = 560/reader.returnSum() * 0.6;
     }
 
 

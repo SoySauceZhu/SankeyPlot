@@ -28,7 +28,7 @@ public class SankeyLauncher extends Application {
         submitButton.setOnAction(actionEvent -> {
             String fileNameFieldText = fileNameField.getText();
             if (fileNameFieldText.isEmpty()) {
-                fileNameFieldText = "D:\\Zhu22\\SynologyDrive\\1.2022_Year2\\4.JAVA\\CourseWork3\\data.txt";
+                fileNameFieldText = "D:\\Zhu22\\SynologyDrive\\1.2022_Year2\\4.JAVA\\CourseWork3\\example1.txt";
             }
             SankeyPlot Plot = new SankeyPlot(fileNameFieldText);
             Stage plotStage = new Stage();
