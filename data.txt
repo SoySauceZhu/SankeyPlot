@@ -1,4 +1,4 @@
-Title of Stage
+Title of
 label
 Mingjie 75
 class one 50

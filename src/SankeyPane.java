@@ -2,7 +2,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class myPane extends Pane {
+public class SankeyPane extends Pane {
 
     String filename;
     SankeyReader reader;
@@ -15,7 +15,7 @@ public class myPane extends Pane {
 
 
     // Constructor: takes in the filename
-    public myPane(String fn) {
+    public SankeyPane(String fn) {
         filename = fn;
         reader = new SankeyReader(fn);
     }
@@ -47,7 +47,7 @@ public class myPane extends Pane {
 
             SankeyNode node = new SankeyNode(0.8 * getWidth(), lowerNodeY + deltaY, size * ZOOM, color);
             SankeyLinker linker = new SankeyLinker(xLeftMost + text0.width, lowerLinkY, node, color);
-            SankeyText text = new SankeyText(string, 0.8 * getWidth() + 20, lowerNodeY + deltaY + size /2 + 5, defaultFont);
+            SankeyText text = new SankeyText(string, 0.8 * getWidth() + 20, lowerNodeY + deltaY + size * ZOOM /2, defaultFont);
 
             getChildren().addAll(node, text, linker);
 
