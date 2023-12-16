@@ -2,52 +2,69 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 public class test extends Application {
+
+    private Line horizontalLine;
+    private Line verticalLine;
 
     @Override
     public void start(Stage primaryStage) {
         // Create a Pane
         Pane pane = new Pane();
 
-        // Set the window size
-        double windowWidth = 600;
-        double windowHeight = 400;
+        // Create a test (Cross) using Lines
+        createNode();
 
-        // Create circles
-        Circle circle1 = new Circle(20, Color.BLUE);
-        Circle circle2 = new Circle(20, Color.RED);
+        // Add the test to the Pane
+        pane.getChildren().addAll(horizontalLine, verticalLine);
 
-        // Add circles to the pane
-        pane.getChildren().addAll(circle1, circle2);
-
-        // Create a scene and set it on the stage
-        Scene scene = new Scene(pane, windowWidth, windowHeight);
+        // Create a Scene and set it on the Stage
+        Scene scene = new Scene(pane, 400, 300);
         primaryStage.setScene(scene);
 
         // Set stage properties
-        primaryStage.setTitle("Dynamic Circles");
+        primaryStage.setTitle("Resizable test");
         primaryStage.show();
 
-        // Set up listeners for window resizing
-        scene.widthProperty().addListener((observable, oldValue, newValue) -> updateCirclePositions(circle1, circle2, scene));
-        scene.heightProperty().addListener((observable, oldValue, newValue) -> updateCirclePositions(circle1, circle2, scene));
+        // Set up listener for window resizing
+        scene.widthProperty().addListener((observable, oldValue, newValue) -> updateNodePosition());
+        scene.heightProperty().addListener((observable, oldValue, newValue) -> updateNodePosition());
 
         // Initial placement
-        updateCirclePositions(circle1, circle2, scene);
+        updateNodePosition();
     }
 
-    private void updateCirclePositions(Circle circle1, Circle circle2, Scene scene) {
-        double trisectionPoint1 = scene.getWidth() / 3.0;
-        double trisectionPoint2 = 2 * scene.getWidth() / 3.0;
+    private void createNode() {
+        // Create horizontal line
+        horizontalLine = new Line();
+        horizontalLine.setStartX(-20);
+        horizontalLine.setStartY(0);
+        horizontalLine.setEndX(20);
+        horizontalLine.setEndY(0);
+        horizontalLine.setStroke(Color.BLUE);
 
-        circle1.setCenterX(trisectionPoint1);
-        circle1.setCenterY(scene.getHeight() / 2.0);
+        // Create vertical line
+        verticalLine = new Line();
+        verticalLine.setStartX(0);
+        verticalLine.setStartY(-20);
+        verticalLine.setEndX(0);
+        verticalLine.setEndY(20);
+        verticalLine.setStroke(Color.BLUE);
+    }
 
-        circle2.setCenterX(trisectionPoint2);
-        circle2.setCenterY(scene.getHeight() / 2.0);
+    private void updateNodePosition() {
+        // Update the position of the test to be centered in the Scene
+        double x = (horizontalLine.getScene().getWidth() - horizontalLine.getEndX() - horizontalLine.getStartX()) / 2.0;
+        double y = (verticalLine.getScene().getHeight() - verticalLine.getEndY() - verticalLine.getStartY()) / 2.0;
+
+        horizontalLine.setTranslateX(x);
+        horizontalLine.setTranslateY(y);
+
+        verticalLine.setTranslateX(x);
+        verticalLine.setTranslateY(y);
     }
 
     public static void main(String[] args) {

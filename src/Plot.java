@@ -2,10 +2,18 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.util.Map;
+
+/* Plot class under construction:
+    1. good init position arrangement
+    2. resizing
+    3. aesthetic
+    4. color random
+ */
 
 public class Plot extends Application {
     String fileName;
@@ -33,10 +41,10 @@ public class Plot extends Application {
 
         // Set stage, scene, pane
         PrimaryStage.setWidth(1000);
-        PrimaryStage.setHeight(500);
+        PrimaryStage.setHeight(750);
         PrimaryStage.setTitle(data.title);
-        Scene scene = new Scene(new Group());   // There will be a listener for scene later
-        Pane root = new Pane();
+        Scene scene = new Scene(new Group());
+        StackPane root = new StackPane();
 
 
     }

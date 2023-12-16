@@ -1,44 +1,37 @@
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class testLauncher extends Application {
 
-
     @Override
-    public void start(Stage PrimaryStage) {
-        Pane pane = new Pane();
+    public void start(Stage primaryStage) {
+        // Create a circle
 
-        PrimaryStage.setWidth(1000);
-        PrimaryStage.setHeight(500);
-        PrimaryStage.setTitle("Hello U");
+        // Create a StackPane to center the circle
+        StackPane root = new StackPane();
 
-        final SankeyNode[] node = {new SankeyNode(500, 200, 100, Color.RED)};
-        final SankeyLinker[] linker = {new SankeyLinker(50, 100, node[0], Color.GREEN)};
+        // Create the scene
+        Scene scene = new Scene(root, 300, 500);
 
-        pane.getChildren().addAll(node[0], linker[0]);
+        // Set the stage properties
+        primaryStage.setTitle("Circle in Middle");
+        primaryStage.setScene(scene);
+        primaryStage.show();
 
-        final Scene[] scene = {new Scene(pane, 1000, 500)};
-        PrimaryStage.setScene(scene[0]);
+        // Center the circle in the middle of the window
+        double centerX = scene.getWidth() / 2;
+        double centerY = scene.getHeight() / 2;
 
-        PrimaryStage.show();
-        scene[0].widthProperty().addListener((observable, oldValue, newValue) -> {
-            node[0] = new SankeyNode(500 + newValue.doubleValue() - oldValue.doubleValue(), 200,100,Color.RED);
-            linker[0] = new SankeyLinker(50, 100, node[0], Color.GREEN);
-
-            pane.getChildren().addAll(node[0], linker[0]);
-
-            scene[0] = new Scene(pane, 1000, 500);
-            PrimaryStage.setScene(scene[0]);
-
-            PrimaryStage.show();
-        });
-
+        SankeyNode circle = new SankeyNode(centerX,centerY,50,Color.GREEN);
+        root.getChildren().add(circle);
     }
 
-
-
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
