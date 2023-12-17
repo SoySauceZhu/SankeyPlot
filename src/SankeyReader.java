@@ -22,15 +22,17 @@ public class SankeyReader {
 
 
     public SankeyReader(String fileName) {
-        // Constructor
+        // Default Constructor
         data = new HashMap<>();
         readerHelper(fileName, false);
     }
 
     public SankeyReader(String fileName, boolean bool) {
         if (bool) {
+            // Additional feature: ordered Map
             data = new LinkedHashMap<>();
         } else {
+            // Unordered Map
             data = new HashMap<>();
         }
         readerHelper(fileName, bool);
@@ -51,6 +53,8 @@ public class SankeyReader {
     public static void main(String[] args) {
         SankeyReader.test();
     }
+
+
 
     private void readerHelper(String fileName, boolean bool) {
         // when bool is true, put the data in an ordered Map. Vice versa
@@ -76,7 +80,7 @@ public class SankeyReader {
 
         } catch (IOException ioe) {
             System.out.println(ioe.getMessage());
-            System.out.println("Crashed: no given file find");
+            System.out.println("Error: no given file find");
             System.exit(1);
         }
     }
@@ -104,14 +108,21 @@ public class SankeyReader {
     public double returnVal(String str) {
         // A helper function for reader to return the value(double)
 
-        for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) >= 48 && str.charAt(i) <= 57) {
-                return Double.parseDouble(str.substring(i));
+        try {
+            for (int i = 0; i < str.length(); i++) {
+                if (str.charAt(i) >= 48 && str.charAt(i) <= 57) {
+                    return Double.parseDouble(str.substring(i));
+                }
             }
+            System.out.println("Error: cannot find val from configuration");
+            System.exit(1);
+            return 0;
+        } catch (NumberFormatException e) {
+            System.out.println("Error: invalid input, invalid value");
+            System.exit(1);
+            return 0;
         }
-        System.out.println("Error: cannot find val from configuration");
-        System.exit(1);
-        return 0;
+
     }
 
     public double returnSum() {

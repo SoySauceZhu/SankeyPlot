@@ -20,12 +20,13 @@ public class CW3_2251804_SankeyDiagrams extends Application {
         primaryStage.setTitle("SankeyPlot Launcher");
 
 
-        // Additional feature: text bar
+        // Additional feature: text bar, submission, ordered submission
         TextField fileNameField = new TextField();
         Button submitButton = new Button("Generate SankeyPlot");
         Button orderedButton = new Button("Generate SankeyPlot (Ordered)");
 
 
+        // Additional feature: submission button
         submitButton.setOnAction(actionEvent -> {
             String fileNameFieldText = fileNameField.getText();
             if (fileNameFieldText.isEmpty()) {
@@ -36,6 +37,9 @@ public class CW3_2251804_SankeyDiagrams extends Application {
             Plot.start(plotStage);
         });
 
+
+
+        // Additional feature: ordered submission button
         orderedButton.setOnAction(actionEvent -> {
             String fileNameFieldText = fileNameField.getText();
             if (fileNameFieldText.isEmpty()) {

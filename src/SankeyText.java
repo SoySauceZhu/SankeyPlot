@@ -27,6 +27,9 @@ public class SankeyText extends Text {
     }
 
 
+
+    /* No usages below */
+
     public static class EndText extends Text {
         public EndText(String content, double x, double y, Color color) {
             Font font = new Font("Arial", 20);

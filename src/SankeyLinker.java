@@ -5,7 +5,7 @@ import javafx.scene.shape.Path;
 import javafx.scene.shape.VLineTo;
 
 
-/* This Class creat a linker band from one node to another */
+/* This Class creat a linker band from one node (or a position) to another */
 
 public class SankeyLinker extends Path {
     SankeyNode start;
@@ -72,7 +72,4 @@ public class SankeyLinker extends Path {
         this.startY = y;
     }
 
-    public void setEnd(SankeyNode node) {
-        this.end = node;
-    }
 }

@@ -18,6 +18,7 @@ public class SankeyPlot extends Application {
     Boolean order;
 
     public SankeyPlot(String fn, Boolean bool) {
+        // Constructor to take in filename, ordered handler
         fileName = fn;
         order = bool;
     }

@@ -5,6 +5,12 @@ import javafx.scene.text.Font;
 import java.text.DecimalFormat;
 
 public class SankeyPane extends Pane {
+    /*
+    Create a Pane for SankeyPlot
+    1. read in file
+    2. add root node, text
+    3. add classes nodes, linkers, texts
+     */
 
     String filename;
     SankeyReader reader;
@@ -26,7 +32,7 @@ public class SankeyPane extends Pane {
     private void paint() {
 
 
-        // set Node0 and Text0
+        // set Node0 and Text0, add to `this` pane
         double sum = reader.returnSum();
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         String formattedString = decimalFormat.format(sum);
@@ -41,11 +47,16 @@ public class SankeyPane extends Pane {
         getChildren().addAll(text0, node0);
 
 
+
+
+        // init position configuration
         double deltaY = (getHeight() - reader.returnSum() * ZOOM) / (reader.data.size() + 1) * 0.75;
         double lowerNodeY = 70;
         double lowerLinkY = node0.yPos;
         int index = 0;
 
+
+        // iterate to create nodes texts linkers, add to pane
         for (String str : reader.data.keySet()) {
 
             double size = reader.data.get(str);
@@ -59,11 +70,11 @@ public class SankeyPane extends Pane {
             getChildren().addAll(node, text, linker);
 
 
+            // update the position
             lowerLinkY = linker.lowerY;
             lowerNodeY = node.lowerY;
             index++;
         }
-
     }
 
     @Override
