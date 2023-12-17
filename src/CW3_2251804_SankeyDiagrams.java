@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 
 /*  Additional Feature: use a textField to take in the filename then pass it to SankeyPlot*/
-public class SankeyLauncher extends Application {
+public class CW3_2251804_SankeyDiagrams extends Application {
 
     public static void main(String[] args) {
         launch(args);

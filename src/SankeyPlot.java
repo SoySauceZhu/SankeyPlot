@@ -29,7 +29,7 @@ public class SankeyPlot extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        SankeyReader reader = new SankeyReader(fileName, order);
+        SankeyReader reader = new SankeyReader(fileName);
         Pane root = new SankeyPane(fileName, order);
         Scene scene = new Scene(root, 1000, 750);
         primaryStage.setTitle(reader.title);
