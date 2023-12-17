@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /* This reader helper have three attribute:
@@ -16,18 +17,28 @@ public class SankeyReader {
 
     public String title;
     public String label;
-    public Map<String, Double> data = new HashMap<>();
+    public Map<String, Double> data;
     // String + DOUBLE
 
 
     public SankeyReader(String fileName) {
         // Constructor
-
-        readerHelper(fileName);
+        data = new HashMap<>();
+        readerHelper(fileName, false);
     }
 
+    public SankeyReader(String fileName, boolean bool) {
+        if (bool) {
+            data = new LinkedHashMap<>();
+        } else {
+            data = new HashMap<>();
+        }
+        readerHelper(fileName, bool);
+    }
+
+
     public static void test() {
-        SankeyReader myTable = new SankeyReader("D:\\Zhu22\\SynologyDrive\\1.2022_Year2\\4.JAVA\\CourseWork3\\data.txt");
+        SankeyReader myTable = new SankeyReader("D:\\Zhu22\\SynologyDrive\\1.2022_Year2\\4.JAVA\\CourseWork3\\data2.txt", true);
 //        Table myTable = new Table("test.txt");
         System.out.println(myTable.title);
         System.out.println(myTable.label);
@@ -41,7 +52,9 @@ public class SankeyReader {
         SankeyReader.test();
     }
 
-    private void readerHelper(String fileName) {
+    private void readerHelper(String fileName, boolean bool) {
+        // when bool is true, put the data in an ordered Map. Vice versa
+
         File file = new File(fileName);
         try {
             FileReader fileReader = new FileReader(file);
@@ -67,6 +80,10 @@ public class SankeyReader {
             System.exit(1);
         }
     }
+
+
+
+
 
     public String returnKey(String str) {
         // A helper function for reader that extract the preferred key(string) in string line

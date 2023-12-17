@@ -16,9 +16,9 @@ public class SankeyPane extends Pane {
 
 
     // Constructor: takes in the filename
-    public SankeyPane(String fn) {
+    public SankeyPane(String fn, boolean bool) {
         filename = fn;
-        reader = new SankeyReader(fn);
+        reader = new SankeyReader(fn, bool);
         ZOOM = 560 / reader.returnSum() * 0.6;
     }
 

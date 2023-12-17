@@ -23,14 +23,25 @@ public class SankeyLauncher extends Application {
         // Additional feature: text bar
         TextField fileNameField = new TextField();
         Button submitButton = new Button("Generate SankeyPlot");
+        Button orderedButton = new Button("Generate SankeyPlot (Ordered)");
 
 
         submitButton.setOnAction(actionEvent -> {
             String fileNameFieldText = fileNameField.getText();
             if (fileNameFieldText.isEmpty()) {
-                fileNameFieldText = "D:\\Zhu22\\SynologyDrive\\1.2022_Year2\\4.JAVA\\CourseWork3\\example1.txt";
+                fileNameFieldText = "D:\\Zhu22\\SynologyDrive\\1.2022_Year2\\4.JAVA\\CourseWork3\\data.txt";
             }
-            SankeyPlot Plot = new SankeyPlot(fileNameFieldText);
+            SankeyPlot Plot = new SankeyPlot(fileNameFieldText, false);
+            Stage plotStage = new Stage();
+            Plot.start(plotStage);
+        });
+
+        orderedButton.setOnAction(actionEvent -> {
+            String fileNameFieldText = fileNameField.getText();
+            if (fileNameFieldText.isEmpty()) {
+                fileNameFieldText = "D:\\Zhu22\\SynologyDrive\\1.2022_Year2\\4.JAVA\\CourseWork3\\data.txt";
+            }
+            SankeyPlot Plot = new SankeyPlot(fileNameFieldText, true);
             Stage plotStage = new Stage();
             Plot.start(plotStage);
         });
@@ -41,9 +52,9 @@ public class SankeyLauncher extends Application {
         vbox.setAlignment(Pos.CENTER);
         vbox.setPadding(new Insets(20));
 
-        vbox.getChildren().addAll(fileNameField, submitButton);
+        vbox.getChildren().addAll(fileNameField, submitButton, orderedButton);
 
-        Scene scene = new Scene(vbox, 300, 150);
+        Scene scene = new Scene(vbox, 350, 300);
         primaryStage.setScene(scene);
 
         primaryStage.show();
