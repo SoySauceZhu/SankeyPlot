@@ -20,6 +20,10 @@ public class SankeyPlot extends Application {
         fileName = fn;
     }
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
     public void start(Stage primaryStage) {
 
@@ -30,9 +34,6 @@ public class SankeyPlot extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-    }
-    public static void main(String[] args) {
-        launch(args);
     }
 
 }

@@ -1,7 +1,9 @@
-Title of
-label
-Mingjie 75
-class one 50
-class two 100
-class three 150
-class four 100
+China's Top Trade Partners (Billion RMB)
+China
+EU 3682.9
+ASEAN 4110.8
+United States 3046.8
+Japan 1448.9
+Hong Kong 1236.1
+Korean 1407.0
+TaiWan 1183.9
