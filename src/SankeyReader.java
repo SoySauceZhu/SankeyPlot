@@ -134,7 +134,7 @@ public class SankeyReader {
         data = shuffle(data);
     }
 
-    private LinkedHashMap<String, Double> ascendingMap(Map<String, Double> map) {
+    private static LinkedHashMap<String, Double> ascendingMap(Map<String, Double> map) {
         List<Map.Entry<String, Double>> entryList = new ArrayList<>(map.entrySet());
         int n = entryList.size();
         boolean swapped;
@@ -164,7 +164,7 @@ public class SankeyReader {
         return sortedMap;
     }
 
-    private LinkedHashMap<String, Double> descendingMap(Map<String, Double> map) {
+    private static LinkedHashMap<String, Double> descendingMap(Map<String, Double> map) {
         List<Map.Entry<String, Double>> entryList = new ArrayList<>(map.entrySet());
         int n = entryList.size();
         boolean swapped;
@@ -194,7 +194,7 @@ public class SankeyReader {
         return sortedMap;
     }
 
-    private LinkedHashMap<String, Double> shuffle(Map<String, Double> originalMap) {
+    private static LinkedHashMap<String, Double> shuffle(Map<String, Double> originalMap) {
         List<Map.Entry<String, Double>> entryList = new ArrayList<>(originalMap.entrySet());
 
         Random random = new Random();

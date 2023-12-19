@@ -31,7 +31,7 @@ public class SankeyPlot extends Application {
     public void start(Stage primaryStage) {
 
         SankeyReader reader = new SankeyReader(fileName);
-        Pane root = new SankeyPane(fileName, sortingInstruction);
+        Pane root = new SankeyPane(fileName);
         Scene scene = new Scene(root, 1000, 750);
         primaryStage.setTitle(reader.title);
         primaryStage.setScene(scene);

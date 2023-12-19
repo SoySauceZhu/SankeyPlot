@@ -23,7 +23,7 @@ public class SankeyPane extends Pane {
 
 
     // Constructor: takes in the filename
-    public SankeyPane(String fn, String str) {
+    public SankeyPane(String fn) {
         filename = fn;
         reader = new SankeyReader(fn);
         ZOOM = 560 / reader.returnSum() * 0.6;
@@ -117,6 +117,7 @@ public class SankeyPane extends Pane {
     }
 
     private Button getButtonRandom(double x, double y) {
+        // Additional Feature: shuffle 
         Button bt = new Button("Shuffle");
         bt.setLayoutY(y);
         bt.setLayoutX(x);
