@@ -48,7 +48,7 @@ public class CW3_2251804_SankeyDiagrams extends Application {
             if (fileNameFieldText.isEmpty()) {
                 fileNameFieldText = "D:\\Zhu22\\SynologyDrive\\1.2022_Year2\\4.JAVA\\CourseWork3\\data.txt";
             }
-            SankeyPlot Plot = new SankeyPlot(fileNameFieldText, "o");
+            SankeyPlot Plot = new SankeyPlot(fileNameFieldText);
             Stage plotStage = new Stage();
             Plot.start(plotStage);
         });

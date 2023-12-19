@@ -10,7 +10,10 @@ public class SankeyPane extends Pane {
     Create a Pane for SankeyPlot
     1. read in file
     2. add root node, text
-    3. add classes nodes, linkers, texts
+    3. add branch node, linkers, texts
+
+    Additional Feature:
+    buttons to change the data order in reader, then paint() pane
      */
 
     String filename;
@@ -31,7 +34,7 @@ public class SankeyPane extends Pane {
 
 
     private void paint() {
-        // Additional Feature: sorting button
+        // Additional Feature: sorting buttons
         Button ascend = getButtonAscend(10, getHeight() - 35);
         Button descend = getButtonDescend(90, getHeight() - 35);
         Button random = getButtonRandom(180, getHeight() - 35);
@@ -52,14 +55,14 @@ public class SankeyPane extends Pane {
         getChildren().addAll(random, descend, ascend, text0, node0);
 
 
-        // init position configuration
+        // init position configuration of branch linker, nodes and text
         double deltaY = (getHeight() - reader.returnSum() * ZOOM) / (reader.data.size() + 1) * 0.75;
         double lowerNodeY = 70;
         double lowerLinkY = node0.yPos;
         int index = 0;
 
 
-        // iterate to create nodes texts linkers, add to pane
+        // iterate to create branch nodes texts linkers, add to pane
         for (String str : reader.data.keySet()) {
 
             double size = reader.data.get(str);
@@ -92,8 +95,8 @@ public class SankeyPane extends Pane {
         paint();
     }
 
+    // Private method: return a button that includes additional Feature, descending sorting
     private Button getButtonDescend(double x, double y) {
-        // Additional Feature: descending sorting
         Button descend = new Button("Descending");
         descend.setLayoutX(x);
         descend.setLayoutY(y);
@@ -104,6 +107,7 @@ public class SankeyPane extends Pane {
         return descend;
     }
 
+    // Private method: return a button that includes additional Feature, ascending sorting
     private Button getButtonAscend(double x, double y) {
         // Additional Feature: ascending sorting
         Button ascend = new Button("Ascending");
@@ -116,6 +120,7 @@ public class SankeyPane extends Pane {
         return ascend;
     }
 
+    // Private method: return a button that includes additional Feature, random order
     private Button getButtonRandom(double x, double y) {
         // Additional Feature: shuffle 
         Button bt = new Button("Shuffle");

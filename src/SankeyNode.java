@@ -11,6 +11,8 @@ import javafx.scene.shape.VLineTo;
 
 
 public class SankeyNode extends Path {
+
+    /* All these properties are public, yet not suppose to be lvalue */
     public static double NodeWidth = 10;    // 10 pixels
     public double xPos;
     public double yPos;

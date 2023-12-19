@@ -48,8 +48,6 @@ public class SankeyReader {
 
 
     private void readerHelper(String fileName) {
-        // when bool is true, put the data in an ordered Map. Vice versa
-
         File file = new File(fileName);
         try {
             FileReader fileReader = new FileReader(file);
@@ -77,8 +75,8 @@ public class SankeyReader {
     }
 
 
+    // A helper function for reader that extract the preferred key(string) in string line. Exception handling
     private String returnKey(String str) {
-        // A helper function for reader that extract the preferred key(string) in string line
         int n;
         for (n = 0; n < str.length(); n++) {
             if (str.charAt(n) >= 48 && str.charAt(n) <= 57) {
@@ -93,9 +91,8 @@ public class SankeyReader {
         return null;
     }
 
+    // A helper function for reader to return the value(double). Exception handling
     private double returnVal(String str) {
-        // A helper function for reader to return the value(double)
-
         try {
             for (int i = 0; i < str.length(); i++) {
                 if (str.charAt(i) >= 48 && str.charAt(i) <= 57) {
@@ -113,27 +110,7 @@ public class SankeyReader {
 
     }
 
-    public double returnSum() {
-        // Return the sum of the values of each key
-        double sum = 0;
-        for (double size : this.data.values()) {
-            sum += size;
-        }
-        return sum;
-    }
-
-    public void toAscend() {
-        data = ascendingMap(data);
-    }
-
-    public void toDescend() {
-        data = descendingMap(data);
-    }
-
-    public void toRandom() {
-        data = shuffle(data);
-    }
-
+    // Using bubble sorting to return a linkedHashMap with ascending order
     private static LinkedHashMap<String, Double> ascendingMap(Map<String, Double> map) {
         List<Map.Entry<String, Double>> entryList = new ArrayList<>(map.entrySet());
         int n = entryList.size();
@@ -164,6 +141,7 @@ public class SankeyReader {
         return sortedMap;
     }
 
+    // Using bubble sorting to return a linkedHashMap with descending order
     private static LinkedHashMap<String, Double> descendingMap(Map<String, Double> map) {
         List<Map.Entry<String, Double>> entryList = new ArrayList<>(map.entrySet());
         int n = entryList.size();
@@ -214,4 +192,29 @@ public class SankeyReader {
 
         return randomizedMap;
     }
+
+    public double returnSum() {
+        // Return the sum of the values of each key
+        double sum = 0;
+        for (double size : this.data.values()) {
+            sum += size;
+        }
+        return sum;
+    }
+
+    // public method: change the data map to ascending order
+    public void toAscend() {
+        data = ascendingMap(data);
+    }
+
+    // public method: change the data map to descending order
+    public void toDescend() {
+        data = descendingMap(data);
+    }
+
+    // public method: change the data map to random order
+    public void toRandom() {
+        data = shuffle(data);
+    }
+
 }
