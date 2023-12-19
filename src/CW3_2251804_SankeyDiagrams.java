@@ -20,35 +20,10 @@ public class CW3_2251804_SankeyDiagrams extends Application {
         primaryStage.setTitle("SankeyPlot Launcher");
 
 
-        // Additional feature: text bar, submission, ordered submission
+        // Additional feature: text bar, submission button
         TextField fileNameField = new TextField();
-        Button submitButton = new Button("Generate SankeyPlot");
-        Button orderedButton = new Button("Generate SankeyPlot (Ordered)");
 
-
-        // Additional feature: submission button
-        submitButton.setOnAction(actionEvent -> {
-            String fileNameFieldText = fileNameField.getText();
-            if (fileNameFieldText.isEmpty()) {
-                fileNameFieldText = "D:\\Zhu22\\SynologyDrive\\1.2022_Year2\\4.JAVA\\CourseWork3\\data.txt";
-            }
-            SankeyPlot Plot = new SankeyPlot(fileNameFieldText, false);
-            Stage plotStage = new Stage();
-            Plot.start(plotStage);
-        });
-
-
-
-        // Additional feature: ordered submission button
-        orderedButton.setOnAction(actionEvent -> {
-            String fileNameFieldText = fileNameField.getText();
-            if (fileNameFieldText.isEmpty()) {
-                fileNameFieldText = "D:\\Zhu22\\SynologyDrive\\1.2022_Year2\\4.JAVA\\CourseWork3\\data.txt";
-            }
-            SankeyPlot Plot = new SankeyPlot(fileNameFieldText, true);
-            Stage plotStage = new Stage();
-            Plot.start(plotStage);
-        });
+        Button submission = getButton(fileNameField);
 
 
         // Create a VBox layout to arrange the components vertically
@@ -56,11 +31,27 @@ public class CW3_2251804_SankeyDiagrams extends Application {
         vbox.setAlignment(Pos.CENTER);
         vbox.setPadding(new Insets(20));
 
-        vbox.getChildren().addAll(fileNameField, submitButton, orderedButton);
+        vbox.getChildren().addAll(fileNameField, submission);
 
         Scene scene = new Scene(vbox, 350, 300);
         primaryStage.setScene(scene);
 
         primaryStage.show();
+    }
+
+    private Button getButton(TextField fileNameField) {
+        Button submission = new Button("Generate SankeyPlot");
+
+
+        submission.setOnAction(actionEvent -> {
+            String fileNameFieldText = fileNameField.getText();
+            if (fileNameFieldText.isEmpty()) {
+                fileNameFieldText = "D:\\Zhu22\\SynologyDrive\\1.2022_Year2\\4.JAVA\\CourseWork3\\data.txt";
+            }
+            SankeyPlot Plot = new SankeyPlot(fileNameFieldText, "o");
+            Stage plotStage = new Stage();
+            Plot.start(plotStage);
+        });
+        return submission;
     }
 }

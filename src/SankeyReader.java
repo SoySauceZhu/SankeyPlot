@@ -25,39 +25,13 @@ public class SankeyReader {
 
     public SankeyReader(String fileName) {
         // Default Constructor
-        data = new HashMap<>();
+        data = new LinkedHashMap<>();
         readerHelper(fileName);
-    }
-
-    public SankeyReader(String fileName, String str) {
-        if (str.equals("u") || str.equals("unordered")) {
-            // Additional feature: unordered Map
-            data = new HashMap<>();
-            readerHelper(fileName);
-        }
-        if (str.equals("o") || str.equals("ordered")) {
-            // Ordered Map
-            data = new LinkedHashMap<>();
-            readerHelper(fileName);
-        }
-        if (str.equals("d") || str.equals("descend")) {
-            // Ordered Map
-            data = new LinkedHashMap<>();
-            readerHelper(fileName);
-            data = descendingMap(data);
-        }
-        if (str.equals("a") || str.equals("ascend")) {
-            // Ordered Map
-            data = new LinkedHashMap<>();
-            readerHelper(fileName);
-            data = ascendingMap(data);
-        }
     }
 
 
     public static void test() {
-        SankeyReader myTable = new SankeyReader("D:\\Zhu22\\SynologyDrive\\1.2022_Year2\\4.JAVA\\CourseWork3\\data2.txt",
-                "d");
+        SankeyReader myTable = new SankeyReader("D:\\Zhu22\\SynologyDrive\\1.2022_Year2\\4.JAVA\\CourseWork3\\data2.txt");
 //        Table myTable = new Table("test.txt");
         System.out.println(myTable.title);
         System.out.println(myTable.label);
@@ -151,6 +125,18 @@ public class SankeyReader {
         return sum;
     }
 
+    public void toAscend() {
+        data = ascendingMap(data);
+    }
+
+    public void toDescend() {
+        data = descendingMap(data);
+    }
+
+    public void toRandom() {
+        data = unorderedMap(data);
+    }
+
     private LinkedHashMap<String, Double> ascendingMap(Map<String, Double> map) {
         List<Map.Entry<String, Double>> entryList = new ArrayList<>(map.entrySet());
         int n = entryList.size();
@@ -210,4 +196,9 @@ public class SankeyReader {
         }
         return sortedMap;
     }
+
+    private HashMap<String, Double> unorderedMap(Map<String, Double> map) {
+        return new HashMap<>(map);
+    }
 }
+

@@ -15,12 +15,12 @@ import javafx.stage.Stage;
 public class SankeyPlot extends Application {
 
     String fileName;
-    Boolean order;
+    String sortingInstruction;
 
-    public SankeyPlot(String fn, Boolean bool) {
+    public SankeyPlot(String fn, String str) {
         // Constructor to take in filename, ordered handler
         fileName = fn;
-        order = bool;
+        sortingInstruction = str;
     }
 
     public static void main(String[] args) {
@@ -31,7 +31,7 @@ public class SankeyPlot extends Application {
     public void start(Stage primaryStage) {
 
         SankeyReader reader = new SankeyReader(fileName);
-        Pane root = new SankeyPane(fileName, order);
+        Pane root = new SankeyPane(fileName, sortingInstruction);
         Scene scene = new Scene(root, 1000, 750);
         primaryStage.setTitle(reader.title);
         primaryStage.setScene(scene);

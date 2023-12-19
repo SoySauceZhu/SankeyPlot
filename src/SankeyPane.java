@@ -1,8 +1,10 @@
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.text.DecimalFormat;
+import java.util.LinkedHashMap;
 
 public class SankeyPane extends Pane {
     /*
@@ -22,14 +24,18 @@ public class SankeyPane extends Pane {
 
 
     // Constructor: takes in the filename
-    public SankeyPane(String fn, boolean bool) {
+    public SankeyPane(String fn, String str) {
         filename = fn;
-        reader = new SankeyReader(fn, bool);
+        reader = new SankeyReader(fn);
         ZOOM = 560 / reader.returnSum() * 0.6;
     }
 
 
     private void paint() {
+        // Additional Feature: sorting button
+        Button ascend = getButtonAscend(10, getHeight() - 35);
+        Button descend = getButtonDescend(90, getHeight() - 35);
+        Button random = getButtonRandom(180, getHeight() -35);
 
 
         // set Node0 and Text0, add to `this` pane
@@ -44,9 +50,7 @@ public class SankeyPane extends Pane {
                 Color.GREEN.darker());
 
         getChildren().clear();
-        getChildren().addAll(text0, node0);
-
-
+        getChildren().addAll(random,descend, ascend ,text0, node0);
 
 
         // init position configuration
@@ -87,5 +91,40 @@ public class SankeyPane extends Pane {
     public void setHeight(double x) {
         super.setHeight(x);
         paint();
+    }
+
+    private Button getButtonDescend(double x, double y) {
+        // Additional Feature: descending sorting
+        Button descend = new Button("Descending");
+        descend.setLayoutX(x);
+        descend.setLayoutY(y);
+        descend.setOnAction(actionEvent -> {
+            reader.toDescend();
+            paint();
+        });
+        return descend;
+    }
+
+    private Button getButtonAscend(double x, double y) {
+        // Additional Feature: ascending sorting
+        Button ascend = new Button("Ascending");
+        ascend.setLayoutX(x);
+        ascend.setLayoutY(y);
+        ascend.setOnAction(actionEvent -> {
+            reader.toAscend();
+            paint();
+        });
+        return ascend;
+    }
+
+    private Button getButtonRandom(double x, double y) {
+        Button bt = new Button("Random");
+        bt.setLayoutY(y);
+        bt.setLayoutX(x);
+        bt.setOnAction(actionEvent -> {
+            reader.toRandom();
+            paint();
+        });
+        return bt;
     }
 }
