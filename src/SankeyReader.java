@@ -46,7 +46,6 @@ public class SankeyReader {
     }
 
 
-
     private void readerHelper(String fileName) {
         // when bool is true, put the data in an ordered Map. Vice versa
 
@@ -75,9 +74,6 @@ public class SankeyReader {
             System.exit(1);
         }
     }
-
-
-
 
 
     private String returnKey(String str) {
@@ -134,7 +130,7 @@ public class SankeyReader {
     }
 
     public void toRandom() {
-        data = unorderedMap(data);
+        data = shuffle(data);
     }
 
     private LinkedHashMap<String, Double> ascendingMap(Map<String, Double> map) {
@@ -161,7 +157,7 @@ public class SankeyReader {
         }
 
         LinkedHashMap<String, Double> sortedMap = new LinkedHashMap<>();
-        for (Map.Entry<String, Double> entry: entryList) {
+        for (Map.Entry<String, Double> entry : entryList) {
             sortedMap.put(entry.getKey(), entry.getValue());
         }
         return sortedMap;
@@ -191,14 +187,30 @@ public class SankeyReader {
         }
 
         LinkedHashMap<String, Double> sortedMap = new LinkedHashMap<>();
-        for (Map.Entry<String, Double> entry: entryList) {
+        for (Map.Entry<String, Double> entry : entryList) {
             sortedMap.put(entry.getKey(), entry.getValue());
         }
         return sortedMap;
     }
 
-    private HashMap<String, Double> unorderedMap(Map<String, Double> map) {
-        return new HashMap<>(map);
+    private LinkedHashMap<String, Double> shuffle(Map<String, Double> originalMap) {
+        List<Map.Entry<String, Double>> entryList = new ArrayList<>(originalMap.entrySet());
+
+        Random random = new Random();
+        int n = entryList.size();
+        for (int i = n - 1; i > 0; i--) {
+            int j = random.nextInt(i + 1);
+            // Swap
+            Map.Entry<String, Double> temp = entryList.get(i);
+            entryList.set(i, entryList.get(j));
+            entryList.set(j, temp);
+        }
+
+        LinkedHashMap<String, Double> randomizedMap = new LinkedHashMap<>();
+        for (Map.Entry<String, Double> entry : entryList) {
+            randomizedMap.put(entry.getKey(), entry.getValue());
+        }
+
+        return randomizedMap;
     }
 }
-

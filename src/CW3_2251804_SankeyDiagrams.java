@@ -33,7 +33,7 @@ public class CW3_2251804_SankeyDiagrams extends Application {
 
         vbox.getChildren().addAll(fileNameField, submission);
 
-        Scene scene = new Scene(vbox, 350, 300);
+        Scene scene = new Scene(vbox, 350, 250);
         primaryStage.setScene(scene);
 
         primaryStage.show();

@@ -118,7 +118,7 @@ public class SankeyPane extends Pane {
     }
 
     private Button getButtonRandom(double x, double y) {
-        Button bt = new Button("Random");
+        Button bt = new Button("Shuffle");
         bt.setLayoutY(y);
         bt.setLayoutX(x);
         bt.setOnAction(actionEvent -> {
