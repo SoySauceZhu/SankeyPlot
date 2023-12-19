@@ -2,14 +2,16 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 /* This reader helper have three attribute:
     1. Title: for javafx stage title
     2. label: for the root (source) node
     3. a map that contains items and their values(double)
+
+    There are some additional feature in this:
+    1. ascending map with bubble sorting
+    2. descending map with bubble sorting
  */
 
 
@@ -24,23 +26,38 @@ public class SankeyReader {
     public SankeyReader(String fileName) {
         // Default Constructor
         data = new HashMap<>();
-        readerHelper(fileName, false);
+        readerHelper(fileName);
     }
 
-    public SankeyReader(String fileName, boolean bool) {
-        if (bool) {
-            // Additional feature: ordered Map
-            data = new LinkedHashMap<>();
-        } else {
-            // Unordered Map
+    public SankeyReader(String fileName, String str) {
+        if (str.equals("u") || str.equals("unordered")) {
+            // Additional feature: unordered Map
             data = new HashMap<>();
+            readerHelper(fileName);
         }
-        readerHelper(fileName, bool);
+        if (str.equals("o") || str.equals("ordered")) {
+            // Ordered Map
+            data = new LinkedHashMap<>();
+            readerHelper(fileName);
+        }
+        if (str.equals("d") || str.equals("descend")) {
+            // Ordered Map
+            data = new LinkedHashMap<>();
+            readerHelper(fileName);
+            data = descendingMap(data);
+        }
+        if (str.equals("a") || str.equals("ascend")) {
+            // Ordered Map
+            data = new LinkedHashMap<>();
+            readerHelper(fileName);
+            data = ascendingMap(data);
+        }
     }
 
 
     public static void test() {
-        SankeyReader myTable = new SankeyReader("D:\\Zhu22\\SynologyDrive\\1.2022_Year2\\4.JAVA\\CourseWork3\\data2.txt", true);
+        SankeyReader myTable = new SankeyReader("D:\\Zhu22\\SynologyDrive\\1.2022_Year2\\4.JAVA\\CourseWork3\\data2.txt",
+                "d");
 //        Table myTable = new Table("test.txt");
         System.out.println(myTable.title);
         System.out.println(myTable.label);
@@ -56,7 +73,7 @@ public class SankeyReader {
 
 
 
-    private void readerHelper(String fileName, boolean bool) {
+    private void readerHelper(String fileName) {
         // when bool is true, put the data in an ordered Map. Vice versa
 
         File file = new File(fileName);
@@ -89,7 +106,7 @@ public class SankeyReader {
 
 
 
-    public String returnKey(String str) {
+    private String returnKey(String str) {
         // A helper function for reader that extract the preferred key(string) in string line
         int n;
         for (n = 0; n < str.length(); n++) {
@@ -105,7 +122,7 @@ public class SankeyReader {
         return null;
     }
 
-    public double returnVal(String str) {
+    private double returnVal(String str) {
         // A helper function for reader to return the value(double)
 
         try {
@@ -134,4 +151,63 @@ public class SankeyReader {
         return sum;
     }
 
+    private LinkedHashMap<String, Double> ascendingMap(Map<String, Double> map) {
+        List<Map.Entry<String, Double>> entryList = new ArrayList<>(map.entrySet());
+        int n = entryList.size();
+        boolean swapped;
+
+        for (int i = 0; i < n - 1; i++) {
+            swapped = false;
+            for (int j = 0; j < n - 1 - i; j++) {
+                if (entryList.get(j).getValue() > entryList.get(j + 1).getValue()) {
+                    // Swap entries if they are in the wrong order
+                    Map.Entry<String, Double> temp = entryList.get(j);
+                    entryList.set(j, entryList.get(j + 1));
+                    entryList.set(j + 1, temp);
+
+                    swapped = true;
+                }
+            }
+            // If no swapping occurred in the inner loop, the list is already sorted
+            if (!swapped) {
+                break;
+            }
+        }
+
+        LinkedHashMap<String, Double> sortedMap = new LinkedHashMap<>();
+        for (Map.Entry<String, Double> entry: entryList) {
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }
+        return sortedMap;
+    }
+
+    private LinkedHashMap<String, Double> descendingMap(Map<String, Double> map) {
+        List<Map.Entry<String, Double>> entryList = new ArrayList<>(map.entrySet());
+        int n = entryList.size();
+        boolean swapped;
+
+        for (int i = 0; i < n - 1; i++) {
+            swapped = false;
+            for (int j = 0; j < n - 1 - i; j++) {
+                if (entryList.get(j).getValue() < entryList.get(j + 1).getValue()) {
+                    // Swap entries if they are in the wrong order
+                    Map.Entry<String, Double> temp = entryList.get(j);
+                    entryList.set(j, entryList.get(j + 1));
+                    entryList.set(j + 1, temp);
+
+                    swapped = true;
+                }
+            }
+            // If no swapping occurred in the inner loop, the list is already sorted
+            if (!swapped) {
+                break;
+            }
+        }
+
+        LinkedHashMap<String, Double> sortedMap = new LinkedHashMap<>();
+        for (Map.Entry<String, Double> entry: entryList) {
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }
+        return sortedMap;
+    }
 }
