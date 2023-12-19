@@ -4,7 +4,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.text.DecimalFormat;
-import java.util.LinkedHashMap;
 
 public class SankeyPane extends Pane {
     /*
@@ -35,7 +34,7 @@ public class SankeyPane extends Pane {
         // Additional Feature: sorting button
         Button ascend = getButtonAscend(10, getHeight() - 35);
         Button descend = getButtonDescend(90, getHeight() - 35);
-        Button random = getButtonRandom(180, getHeight() -35);
+        Button random = getButtonRandom(180, getHeight() - 35);
 
 
         // set Node0 and Text0, add to `this` pane
@@ -50,7 +49,7 @@ public class SankeyPane extends Pane {
                 Color.GREEN.darker());
 
         getChildren().clear();
-        getChildren().addAll(random,descend, ascend ,text0, node0);
+        getChildren().addAll(random, descend, ascend, text0, node0);
 
 
         // init position configuration
