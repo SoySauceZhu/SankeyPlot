@@ -15,12 +15,10 @@ import javafx.stage.Stage;
 public class SankeyPlot extends Application {
 
     String fileName;
-    String sortingInstruction;
 
-    public SankeyPlot(String fn, String str) {
+    public SankeyPlot(String fn) {
         // Constructor to take in filename, ordered handler
         fileName = fn;
-        sortingInstruction = str;
     }
 
     public static void main(String[] args) {
